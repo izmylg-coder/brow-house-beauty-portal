@@ -3,86 +3,100 @@ import { User } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
-const TEAM_PHOTO = "https://media.base44.com/images/public/6a2e61f6742da0538b30e6b4/4639f41e8_Screenshot_20260613_190907_Instagram.jpg";
+const FEATURED_PHOTO = "https://media.base44.com/images/public/6a2e61f6742da0538b30e6b4/c39d155ad_ae502357-8f4e-4390-b018-94f18ca5549e.jpg";
 
-const ArtistCard = ({ artist, index }) => (
+const ArtistCircle = ({ artist, index }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
     viewport={{ once: true }}
-    className="group text-center"
+    className="flex flex-col items-center text-center"
   >
-    <div className="relative w-28 h-28 sm:w-32 sm:h-32 mx-auto mb-4">
-      <div className="absolute inset-0 rounded-full border-2 border-[#B8861B]/50 group-hover:border-[#D4A832] group-hover:scale-105 transition-all duration-500" />
-      <div className="absolute inset-1 rounded-full overflow-hidden bg-[#3B1F0D]/40">
+    <div className="relative w-28 h-28 sm:w-32 sm:h-32 mb-3">
+      <div className="absolute inset-0 rounded-full border-2 border-[#B8861B]/50" />
+      <div className="absolute inset-1 rounded-full overflow-hidden bg-[#C4A882]/30">
         {artist.image_url ? (
           <img src={artist.image_url} alt={artist.name} className="w-full h-full object-cover" />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-[#3B1F0D]/60">
-            <User className="w-8 h-8 text-[#C4A882]/50" />
+          <div className="w-full h-full flex items-center justify-center bg-[#3B1F0D]/20">
+            <User className="w-8 h-8 text-[#3B1F0D]/40" />
           </div>
         )}
       </div>
     </div>
-    <h3 className="font-body text-sm font-bold text-[#231108] tracking-[0.1em] uppercase mb-0.5">{artist.name}</h3>
-    <p className="text-[#3B1F0D]/60 text-xs font-body tracking-wide uppercase">{artist.title}</p>
+    <h3 className="font-body text-sm font-bold text-[#231108] tracking-[0.12em] uppercase">{artist.name}</h3>
+    <p className="text-[#3B1F0D]/55 text-xs font-body tracking-wider uppercase mt-0.5 leading-tight max-w-[120px]">{artist.title}</p>
   </motion.div>
 );
 
 export default function ArtistsSection({ artists = [] }) {
   const sorted = [...artists].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  const row1 = sorted.slice(0, 2);
+  const row2 = sorted.slice(2);
 
   return (
-    <section id="artists" className="py-24 lg:py-32 bg-[#F0E8D8] relative overflow-hidden">
-      {/* Warm texture glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#B8861B]/8 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#B8861B]/6 rounded-full blur-[100px] pointer-events-none" />
+    <section id="artists" className="py-20 lg:py-28 bg-[#EDE3D0] relative overflow-hidden">
+      {/* Subtle warm glows */}
+      <div className="absolute top-0 left-0 w-80 h-80 bg-[#B8861B]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-[#B8861B]/8 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="relative max-w-6xl mx-auto px-6 lg:px-12">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-          {/* Left — Artists grid + label */}
+          {/* LEFT — Specialist circles */}
           <AnimatedSection>
             <div>
-              <p className="text-[#B8861B] text-xs tracking-[0.3em] uppercase font-body font-semibold mb-10 text-center lg:text-left">
+              <p className="text-[#231108] text-xs tracking-[0.35em] uppercase font-body font-bold mb-10 text-center">
                 BH&B Specialists
               </p>
-              <div className="flex flex-wrap justify-center lg:justify-start gap-8">
-                {sorted.map((artist, i) => (
-                  <ArtistCard key={artist.id} artist={artist} index={i} />
+
+              {/* Row 1 — 2 artists */}
+              <div className="flex justify-center gap-10 mb-10">
+                {row1.map((artist, i) => (
+                  <ArtistCircle key={artist.id} artist={artist} index={i} />
+                ))}
+              </div>
+
+              {/* Row 2 — remaining artists */}
+              <div className="flex justify-center gap-8 flex-wrap">
+                {row2.map((artist, i) => (
+                  <ArtistCircle key={artist.id} artist={artist} index={i + 2} />
                 ))}
               </div>
             </div>
           </AnimatedSection>
 
-          {/* Right — Team photo + copy */}
+          {/* RIGHT — Photo + heading + copy */}
           <AnimatedSection delay={0.2}>
             <div className="flex flex-col items-center lg:items-start">
-              {/* Team photo */}
-              <div className="relative w-full max-w-sm lg:max-w-none mb-8 rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src={TEAM_PHOTO}
-                  alt="BH&B Team"
-                  className="w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#231108]/30 to-transparent" />
-              </div>
 
               {/* Heading */}
-              <h2 className="font-heading text-4xl lg:text-5xl xl:text-6xl font-bold text-[#231108] leading-tight mb-6 text-center lg:text-left">
-                Meet Your{" "}
-                <span className="italic text-[#B8861B] font-display">Artists</span>
-              </h2>
+              <div className="mb-6 text-center lg:text-left">
+                <h2 className="font-heading leading-tight text-[#231108]">
+                  <span className="block text-4xl lg:text-5xl font-bold tracking-tight">Meet Your</span>
+                  <span className="block text-5xl lg:text-6xl italic font-display text-[#B8861B]">Artists</span>
+                </h2>
+              </div>
 
-              <div className="space-y-4 text-center lg:text-left">
-                <p className="font-body text-[#3B1F0D]/75 text-base lg:text-lg leading-relaxed italic">
+              {/* Featured photo */}
+              <div className="w-full rounded-2xl overflow-hidden shadow-xl mb-7">
+                <img
+                  src={FEATURED_PHOTO}
+                  alt="BH&B Artists"
+                  className="w-full object-cover max-h-72 object-top"
+                />
+              </div>
+
+              {/* Copy paragraphs */}
+              <div className="space-y-3 text-center lg:text-left">
+                <p className="font-body text-[#3B1F0D]/75 text-sm lg:text-base leading-relaxed italic">
                   Our team is made up of highly skilled brow and lash artists with years of experience in mapping, shaping and enhancing brows/lashes to complement every unique face.
                 </p>
-                <p className="font-body text-[#3B1F0D]/75 text-base lg:text-lg leading-relaxed italic">
+                <p className="font-body text-[#3B1F0D]/75 text-sm lg:text-base leading-relaxed italic">
                   Each artist brings passion, creativity, and expert technique to every service, ensuring results that are both precise and beautifully tailored to each client.
                 </p>
-                <p className="font-body text-[#3B1F0D]/80 text-base lg:text-lg leading-relaxed font-medium italic">
+                <p className="font-body text-[#3B1F0D]/80 text-sm lg:text-base leading-relaxed italic font-semibold">
                   At Brow House & Beauty, we believe great brows, lashes & beauty start with intention and expertise.
                 </p>
               </div>
