@@ -1,0 +1,65 @@
+{
+  "name": "SiteContent",
+  "type": "object",
+  "properties": {
+    "section": {
+      "type": "string",
+      "enum": [
+        "hero",
+        "about",
+        "promos",
+        "policies_brow",
+        "policies_lash",
+        "policies_wax",
+        "policies_cancellation",
+        "info"
+      ],
+      "description": "Which section this content belongs to"
+    },
+    "headline": {
+      "type": "string"
+    },
+    "subheadline": {
+      "type": "string"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string",
+      "description": "Main body text / content"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "hours": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
+    },
+    "tiktok": {
+      "type": "string"
+    },
+    "ticker_text": {
+      "type": "string",
+      "description": "Scrolling ticker text"
+    },
+    "marquee_text": {
+      "type": "string",
+      "description": "Gold marquee strip text"
+    }
+  },
+  "required": [
+    "section"
+  ]
+}
