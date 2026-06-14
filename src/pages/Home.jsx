@@ -10,6 +10,7 @@ import ServicesGrid from "../components/public/ServicesGrid";
 import ArtistsSection from "../components/public/ArtistsSection";
 import ReviewsSection from "../components/public/ReviewsSection";
 import BookCTA from "../components/public/BookCTA";
+import GallerySection from "../components/public/GallerySection";
 import PoliciesSection from "../components/public/PoliciesSection";
 import Footer from "../components/public/Footer";
 
@@ -53,6 +54,7 @@ export default function Home() {
       <ServicesGrid services={services} />
       <ArtistsSection artists={artists} />
       <ReviewsSection reviews={reviews} />
+      <GallerySection />
       <BookCTA />
       <PoliciesSection policies={policies} />
       <Footer info={info} />
