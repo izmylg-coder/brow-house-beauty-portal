@@ -3,7 +3,6 @@ import { User } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
-const FEATURED_PHOTO = "https://media.base44.com/images/public/6a2e61f6742da0538b30e6b4/c39d155ad_ae502357-8f4e-4390-b018-94f18ca5549e.jpg";
 
 const ArtistCircle = ({ artist, index }) => (
   <motion.div
@@ -77,15 +76,6 @@ export default function ArtistsSection({ artists = [] }) {
                   <span className="block text-4xl lg:text-5xl font-bold tracking-tight">Meet Your</span>
                   <span className="block text-5xl lg:text-6xl italic font-display text-[#B8861B]">Artists</span>
                 </h2>
-              </div>
-
-              {/* Featured photo */}
-              <div className="w-full rounded-2xl overflow-hidden shadow-xl mb-7">
-                <img
-                  src={FEATURED_PHOTO}
-                  alt="BH&B Artists"
-                  className="w-full object-cover max-h-72 object-top"
-                />
               </div>
 
               {/* Copy paragraphs */}
